@@ -9,11 +9,11 @@ function validateLogin(
   const { username, password } = req.body;
     
   if (!username) {
-    res.status(StatusCodes.BAD_REQUEST).json({ message: '"username" is required' });
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: '"username" is required' });
   }
 
   if (!password) {
-    res.status(StatusCodes.BAD_REQUEST).json({ message: '"password" is required' });
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: '"password" is required' });
   }
   
   next();

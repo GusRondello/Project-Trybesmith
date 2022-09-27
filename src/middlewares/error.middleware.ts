@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 const errorMiddleware = async (
-  err: Error,
+  _err: Error,
   _req: Request,
   res: Response,
   _next: NextFunction,

@@ -6,12 +6,12 @@ export default class UserController {
   constructor(private UsersService = new UserSevice()) {}
 
   public findUser = async (req: Request, res: Response): Promise<Response> => {
-    const { username, passowrd } = req.body;
+    const { username, password } = req.body;
 
-    const token = await this.UsersService.findUser(username, passowrd);
+    const token = await this.UsersService.findUser(username, password);
 
     if (!token) {
-      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Username or password invalid' });
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Username or password invalid' });
     }
     
     return res.status(StatusCodes.OK).json({ token });

@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import User from '../interfaces/user.interface';
+import generateToken from '../helpers/generateToken';
+import { User } from '../interfaces/user.interface';
 import connection from '../models/connection';
 import UsersModel from '../models/user.model';
 
@@ -14,17 +14,16 @@ export default class UserSevice {
     const result = await this.model.findUser(username, password);
 
     if (result) {
-      const token = jwt.sign({ username, password }, '123456');
+      const token = generateToken(result);
       return token;
     }
     return null;
   }
 
   public async create(user: User): Promise<string> {
-    const { username, password } = user;
     await this.model.create(user);
 
-    const token = jwt.sign({ username, password }, '123456');
+    const token = generateToken(user);
     return token;
   }
 }
