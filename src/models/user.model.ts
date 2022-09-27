@@ -8,19 +8,19 @@ export default class UsersModel {
     this.connection = connection;
   }
 
-  public async findUser(username: string, passowrd: string): Promise <User | null> {
+  public async findUser(username: string, password: string): Promise <User | null> {
     const [result] = await this.connection.execute(`SELECT * FROM Trybesmith.Users
-    WHERE username=? AND password=?`, [username, passowrd]);
+    WHERE username=? AND password=?`, [username, password]);
 
     const [user] = result as User[];
     
     return user || null;
   }
 
-  public async getUserId(username: string, passowrd: string): Promise<number | null> {
+  public async getUserId(username: string, password: string): Promise<number | null> {
     const [result] = await this.connection.execute(
       'SELECT * FROM Trybesmith.Users WHERE username=? AND password=?',
-      [username, passowrd],
+      [username, password],
     );
 
     const [user] = result as User[];

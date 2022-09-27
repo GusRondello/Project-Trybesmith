@@ -13,11 +13,13 @@ export default class OrderController {
 
   public create = async (req: UserAuthRequest, res: Response): Promise<Response> => {
     const { productsIds } = req.body;
-    if (!req.userInfo) {
+    
+    if (!req.userInfo?.user) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized' });
     }
+    const { user } = req.userInfo;
 
-    const result = await this.OrdersService.create(req.userInfo, productsIds);
+    const result = await this.OrdersService.create(user, productsIds);
 
     return res.status(StatusCodes.CREATED).json(result);
   };

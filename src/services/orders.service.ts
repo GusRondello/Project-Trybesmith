@@ -25,7 +25,7 @@ export default class OrderService {
 
   public async create(user: JwtPayload, productsIds: number[]): Promise<Order | null> {
     const { username, password } = user;
-
+    
     const userId = await this.userModel.getUserId(username, password);
 
     if (!userId) { 

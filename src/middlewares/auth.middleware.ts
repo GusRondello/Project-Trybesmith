@@ -9,15 +9,15 @@ const userAuth = async (
   next: NextFunction,
 ): Promise<Response | void> => {
   const { authorization } = req.headers;
-
+  
   if (!authorization) {
-    return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not foud' });
+    return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not found' });
   }
 
   try { 
     const secret = process.env.JWT_SECRET || 'defaultsecret';
     const result = jwt.verify(authorization, secret);
-
+    
     req.userInfo = result as JwtPayload;
 
     next();
